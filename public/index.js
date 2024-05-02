@@ -29,7 +29,7 @@ const renderCars = (data) => {
 
     accordItem.classList.add('accordion-item');
     accordHeader.classList.add('accordion-header');
-    accordButton.classList.add('accordion-button');
+    accordButton.classList.add('accordion-button', 'collapsed');
 
     accordButton.setAttribute('type', 'button');
     accordButton.setAttribute('data-bs-toggle', 'collapse');
@@ -37,10 +37,10 @@ const renderCars = (data) => {
    
     accordButton.setAttribute('data-bs-target', `#collapse${accordArray[i]}`);
 
-    accordButton.setAttribute('aria-expanded', 'true');
+    accordButton.setAttribute('aria-expanded', 'false');
     accordButton.setAttribute('aria-controls', `collapse${accordArray[i]}`);
 
-    accordCollapse.classList.add('accordion-collapse', 'collapse', 'show');
+    accordCollapse.classList.add('accordion-collapse', 'collapse');
     accordCollapse.setAttribute('id', `collapse${accordArray[i]}`);
     accordCollapse.setAttribute('data-bs-parent', '#accordionExample');
     accordBody.classList.add('accordion-body');
