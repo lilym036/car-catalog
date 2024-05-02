@@ -9,8 +9,8 @@ const PORT= 3001;
 // Static middleware pointing to public folder 
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname,'index.html'));
+app.get('/cars', function (req, res) {
+  res.sendFile(path.join(__dirname,'public/index.html'));
 })
 
 
