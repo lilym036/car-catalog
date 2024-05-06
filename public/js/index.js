@@ -1,30 +1,26 @@
 const accordEl = document.getElementById('accordionExample');
-const hondaItem = document.getElementById('honda');
-const toyotaItem = document.getElementById('toyota');
-const fordItem = document.getElementById('ford');
-const ferrariItem = document.getElementById('ferrari');
-const searchForm = document.getElementById('search-form')
+const searchForm = document.getElementById('search-form');
+
 
 const accordArray = ['One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight'];
 
-const price = ['20,000', '50,000', '30,000', '80,000', '60,000', '75,000'];
+const price = ['20,000', '25,000', '30,000', '50,000', '60,000', '75,000', '80,000'];
 const carMpg = [27, 33, 40, 25, 50, 45, 70];
-const carSeats = [4, 5, 7, 9, 2, 4, 7];
+const carSeats = [4, 4, 4, 7, 2, 4, 2];
 
 // GET all cars
 fetch('https://exam.razoyo.com/api/cars', {
   method: 'GET',
-  headers: {
-    accept: "application/json",
-    Authorization: 'Bearer my-token',
-  }
+  // headers: {
+  //   accept: "application/json",
+  //   Authorization: 'Bearer my-token',
+  // }
 })
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     console.log(data);
-
     for (let i = 0; i < data.cars.length; i++) {
       const accordItem = document.createElement('div');
       const accordHeader = document.createElement('h2');
@@ -71,10 +67,43 @@ fetch('https://exam.razoyo.com/api/cars', {
 
   });
 
+// GETs /cars with the query parameter
+function displaySearch(event) {
+  event.preventDefault();
+  const searchInputVal = document.querySelector('#search-input').value;
+
+  if (!searchInputVal) {
+    console.error('You need a search input value!');
+    return;
+  }
+
+  const options = {
+    method: 'Get',
+    headers: {
+      accept: "application/json",
+      Authorization: 'Bearer your-token'
+    }
+  }
+
+  fetch('https://exam.razoyo.com/api/cars?make=' + searchInputVal, options)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+
+      for (let i = 0; i < data.length; i++) {
+        if (data.cars[i].make === searchInputVal) {
+          console.log(data.cars[i].make)
 
 
+        }
+      }
+    })
+}
 
 
+searchForm.addEventListener('submit', displaySearch);
 
 
 
@@ -93,4 +122,5 @@ fetch('https://exam.razoyo.com/api/cars', {
 //   console.log(jsonOne);
 //   return jsonOne;
 // };
+
 
